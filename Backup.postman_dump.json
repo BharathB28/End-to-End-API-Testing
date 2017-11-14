@@ -1,0 +1,346 @@
+{
+	"version": 1,
+	"collections": [
+		{
+			"id": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+			"name": "api testing",
+			"description": "Demo, to test some api",
+			"order": [],
+			"folders": [
+				{
+					"collection": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"collectionId": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"createdAt": 1510554755529,
+					"description": "Authentication",
+					"folders_order": [],
+					"id": "3edc2d60-c6b4-8572-1b5b-45e1fda580c2",
+					"name": "Authentication",
+					"order": [],
+					"owner": "1404846",
+					"updatedAt": 1510554755529,
+					"collection_id": "a58e31c8-ad1d-6195-e02c-e6326513bb3f"
+				},
+				{
+					"collection": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"collectionId": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"collection_id": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"createdAt": 1510546457603,
+					"description": "To Check list of product",
+					"folders_order": [],
+					"id": "99ed7d70-be66-d989-c7e2-680c79fe221e",
+					"name": "Product",
+					"order": [
+						"fc76416b-361e-7aa5-6a61-7331b866ea1f"
+					],
+					"owner": "1404846",
+					"updatedAt": 1510546457603
+				},
+				{
+					"collection": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"collectionId": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"collection_id": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"createdAt": 1510544835839,
+					"description": "script to test list of client",
+					"folders_order": [],
+					"id": "a95d4d1e-583c-17ca-6730-f497c15dfee2",
+					"name": "client",
+					"order": [
+						"f3172fbc-8a85-13e2-f42e-01a238e95bc5",
+						"df908558-985a-5132-9724-5aa9f25762ee",
+						"c1a5c109-f1f6-bb1e-8f2b-303060d22ca1"
+					],
+					"owner": "1404846",
+					"updatedAt": 1510544835839
+				}
+			],
+			"folders_order": [
+				"a95d4d1e-583c-17ca-6730-f497c15dfee2",
+				"99ed7d70-be66-d989-c7e2-680c79fe221e",
+				"3edc2d60-c6b4-8572-1b5b-45e1fda580c2"
+			],
+			"timestamp": 1510544729650,
+			"synced": true,
+			"remote_id": 1012917,
+			"owner": "1404846",
+			"sharedWithTeam": false,
+			"subscribed": false,
+			"public": false,
+			"createdAt": 1510655036303,
+			"updatedAt": 1510655036303,
+			"write": true,
+			"published": false,
+			"favorite": true,
+			"permissions": {},
+			"syncedPermissions": {},
+			"shared": false,
+			"hasRequests": true,
+			"requests": [
+				{
+					"id": "c1a5c109-f1f6-bb1e-8f2b-303060d22ca1",
+					"headers": "Authorization: {{Authorization}}\nFineract-Platform-TenantId: {{tenantIdentifier}}\n",
+					"headerData": [
+						{
+							"key": "Authorization",
+							"value": "{{Authorization}}",
+							"description": "",
+							"enabled": true
+						},
+						{
+							"key": "Fineract-Platform-TenantId",
+							"value": "{{tenantIdentifier}}",
+							"description": "",
+							"enabled": true
+						}
+					],
+					"url": "{{ApiEnPoint}}runreports/ClientSummary/?R_clientId={{user_id}}&genericResultSet=false",
+					"folder": "a95d4d1e-583c-17ca-6730-f497c15dfee2",
+					"queryParams": [
+						{
+							"key": "R_clientId",
+							"value": "{{user_id}}",
+							"equals": true,
+							"description": "",
+							"enabled": true
+						},
+						{
+							"key": "genericResultSet",
+							"value": "false",
+							"equals": true,
+							"description": "",
+							"enabled": true
+						}
+					],
+					"preRequestScript": "",
+					"pathVariables": {},
+					"pathVariableData": [],
+					"method": "GET",
+					"data": null,
+					"dataMode": "params",
+					"version": 2,
+					"tests": "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\nvar expectedJson =\n[\n{\"loanCycle\": 0,\n\"activeLoans\": 1,\n\"lastLoanAmount\": 10000.000000,\n\"activeSavings\": 0,\n\"totalSavings\": 0.000000,\n\"productName\": \"Esta\",\n\"loanProductCycle\": 1}\n]\n\n//postman.setGlobalVariable(\"user_id\", expectedJson[0].lastLoanAmount);\n\nconsole.log(expectedJson[0].lastLoanAmount);\n\nvar myJSON = JSON.stringify(expectedJson); \n\n//pm.test(\"Body is correct\", function () {\n//    pm.response.to.have.body(myJSON)});\n\npm.test(\"test lastLoanAmount\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(expectedJson[0].lastLoanAmount).to.eql(10000);\n});",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1510577362789,
+					"name": "Client Summary Data",
+					"description": "Client Summary Data",
+					"collectionId": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"responses": [],
+					"owner": "1404846",
+					"collection": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"collection_id": "a58e31c8-ad1d-6195-e02c-e6326513bb3f"
+				},
+				{
+					"id": "df908558-985a-5132-9724-5aa9f25762ee",
+					"headers": "Authorization: {{Authorization}}\nFineract-Platform-TenantId: {{tenantIdentifier}}\n",
+					"headerData": [
+						{
+							"key": "Authorization",
+							"value": "{{Authorization}}",
+							"description": "",
+							"enabled": true
+						},
+						{
+							"key": "Fineract-Platform-TenantId",
+							"value": "{{tenantIdentifier}}",
+							"description": "",
+							"enabled": true
+						}
+					],
+					"url": "{{ApiEnPoint}}clients/{{user_id}}?associations=hierarchyLookup",
+					"folder": "a95d4d1e-583c-17ca-6730-f497c15dfee2",
+					"queryParams": [
+						{
+							"key": "associations",
+							"value": "hierarchyLookup",
+							"equals": true,
+							"description": "",
+							"enabled": true
+						}
+					],
+					"preRequestScript": "",
+					"pathVariables": {},
+					"pathVariableData": [],
+					"method": "GET",
+					"data": null,
+					"dataMode": "params",
+					"tests": "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\nvar expectedJson =\n{\n    \"id\": 1,\n    \"accountNo\": \"000000001\",\n    \"status\": {\n        \"id\": 300,\n        \"code\": \"clientStatusType.active\",\n        \"value\": \"Active\"\n    },\n    \"subStatus\": {\n        \"isActive\": false,\n        \"mandatory\": false\n    },\n    \"active\": true,\n    \"activationDate\": [\n        2017,\n        11,\n        10\n    ],\n    \"firstname\": \"ewrrg\",\n    \"lastname\": \"rth\",\n    \"displayName\": \"ewrrg rth\",\n    \"gender\": {\n        \"id\": 23,\n        \"name\": \"Male\",\n        \"isActive\": false,\n        \"mandatory\": false\n    },\n    \"clientType\": {\n        \"isActive\": false,\n        \"mandatory\": false\n    },\n    \"clientClassification\": {\n        \"isActive\": false,\n        \"mandatory\": false\n    },\n    \"officeId\": 1,\n    \"officeName\": \"Head Office\",\n    \"timeline\": {\n        \"submittedOnDate\": [\n            2017,\n            11,\n            10\n        ],\n        \"submittedByUsername\": \"conflux\",\n        \"submittedByFirstname\": \"App\",\n        \"submittedByLastname\": \"Administrator\",\n        \"activatedOnDate\": [\n            2017,\n            11,\n            10\n        ],\n        \"activatedByUsername\": \"conflux\",\n        \"activatedByFirstname\": \"App\",\n        \"activatedByLastname\": \"Administrator\"\n    },\n    \"legalForm\": {\n        \"id\": 1,\n        \"code\": \"legalFormType.person\",\n        \"value\": \"PERSON\"\n    },\n    \"groups\": [],\n    \"clientNonPersonDetails\": {\n        \"constitution\": {\n            \"isActive\": false,\n            \"mandatory\": false\n        },\n        \"mainBusinessLine\": {\n            \"isActive\": false,\n            \"mandatory\": false\n        }\n    },\n    \"isLocked\": false,\n    \"isWorkflowEnabled\": false\n}\n\nvar myJSON = JSON.stringify(expectedJson); \n\npm.test(\"Body is correct\", function () {\n    pm.response.to.have.body(myJSON)});",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1510576537727,
+					"name": "Clients data",
+					"description": "Clients data",
+					"collectionId": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"responses": [],
+					"owner": "1404846",
+					"collection": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"collection_id": "a58e31c8-ad1d-6195-e02c-e6326513bb3f"
+				},
+				{
+					"id": "f3172fbc-8a85-13e2-f42e-01a238e95bc5",
+					"headers": "Fineract-Platform-TenantId: {{tenantIdentifier}}\nAuthorization: {{Authorization}}\n",
+					"headerData": [
+						{
+							"key": "Fineract-Platform-TenantId",
+							"value": "{{tenantIdentifier}}",
+							"description": "",
+							"enabled": true
+						},
+						{
+							"key": "Authorization",
+							"value": "{{Authorization}}",
+							"description": "",
+							"enabled": true
+						}
+					],
+					"url": "{{ApiEnPoint}}clients?limit=15&offset=0",
+					"folder": "a95d4d1e-583c-17ca-6730-f497c15dfee2",
+					"queryParams": [
+						{
+							"key": "limit",
+							"value": "15",
+							"equals": true,
+							"description": "",
+							"enabled": true
+						},
+						{
+							"key": "offset",
+							"value": "0",
+							"equals": true,
+							"description": "",
+							"enabled": true
+						}
+					],
+					"preRequestScript": "",
+					"pathVariables": {},
+					"pathVariableData": [],
+					"method": "GET",
+					"data": null,
+					"dataMode": "params",
+					"tests": "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\nvar jsonData = JSON.parse(responseBody);\n\n//console.log(jsonData.pageItems[0].id);\n\npostman.setGlobalVariable(\"user_id\", jsonData.pageItems[0].id);\n\nvar obj = {\n    \"totalFilteredRecords\": 1,\n    \"pageItems\": [\n        {\n            \"id\": 1,\n            \"accountNo\": \"000000001\",\n            \"status\": {\n                \"id\": 300,\n                \"code\": \"clientStatusType.active\",\n                \"value\": \"Active\"\n            },\n            \"subStatus\": {\n                \"isActive\": false,\n                \"mandatory\": false\n            },\n            \"active\": true,\n            \"activationDate\": [\n                2017,\n                11,\n                10\n            ],\n            \"firstname\": \"ewrrg\",\n            \"lastname\": \"rth\",\n            \"displayName\": \"ewrrg rth\",\n            \"gender\": {\n                \"id\": 23,\n                \"name\": \"Male\",\n                \"isActive\": false,\n                \"mandatory\": false\n            },\n            \"clientType\": {\n                \"isActive\": false,\n                \"mandatory\": false\n            },\n            \"clientClassification\": {\n                \"isActive\": false,\n                \"mandatory\": false\n            },\n            \"officeId\": 1,\n            \"officeName\": \"Head Office\",\n            \"timeline\": {\n                \"submittedOnDate\": [\n                    2017,\n                    11,\n                    10\n                ],\n                \"submittedByUsername\": \"conflux\",\n                \"submittedByFirstname\": \"App\",\n                \"submittedByLastname\": \"Administrator\",\n                \"activatedOnDate\": [\n                    2017,\n                    11,\n                    10\n                ],\n                \"activatedByUsername\": \"conflux\",\n                \"activatedByFirstname\": \"App\",\n                \"activatedByLastname\": \"Administrator\"\n            },\n            \"legalForm\": {\n                \"id\": 1,\n                \"code\": \"legalFormType.person\",\n                \"value\": \"PERSON\"\n            },\n            \"clientNonPersonDetails\": {\n                \"constitution\": {\n                    \"isActive\": false,\n                    \"mandatory\": false\n                },\n                \"mainBusinessLine\": {\n                    \"isActive\": false,\n                    \"mandatory\": false\n                }\n            },\n            \"isLocked\": false,\n            \"isWorkflowEnabled\": false\n        }\n    ]\n}\n\nvar myJSON = JSON.stringify(obj); \n\npm.test(\"Body is correct\", function () {\n    pm.response.to.have.body(myJSON)});\n    \n    \n\n\n",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1510576118453,
+					"name": "List Of Client",
+					"description": "To Test API's of clients",
+					"collectionId": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"responses": [],
+					"owner": "1404846",
+					"collection": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"collection_id": "a58e31c8-ad1d-6195-e02c-e6326513bb3f"
+				},
+				{
+					"id": "fc76416b-361e-7aa5-6a61-7331b866ea1f",
+					"headers": "Fineract-Platform-TenantId: {{tenantIdentifier}}\nAuthorization: {{Authorization}}\n",
+					"headerData": [
+						{
+							"key": "Fineract-Platform-TenantId",
+							"value": "{{tenantIdentifier}}",
+							"description": "",
+							"enabled": true
+						},
+						{
+							"key": "Authorization",
+							"value": "{{Authorization}}",
+							"description": "",
+							"enabled": true
+						}
+					],
+					"url": "{{ApiEnPoint}}loanproducts",
+					"folder": "99ed7d70-be66-d989-c7e2-680c79fe221e",
+					"queryParams": [],
+					"preRequestScript": null,
+					"pathVariables": {},
+					"pathVariableData": [],
+					"method": "GET",
+					"data": null,
+					"dataMode": "params",
+					"version": 2,
+					"tests": "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\nvar obj = {\n    \"totalFilteredRecords\": 1,\n    \"pageItems\": [\n        {\n            \"id\": 1,\n            \"accountNo\": \"000000001\",\n            \"status\": {\n                \"id\": 300,\n                \"code\": \"clientStatusType.active\",\n                \"value\": \"Active\"\n            },\n            \"subStatus\": {\n                \"isActive\": false,\n                \"mandatory\": false\n            },\n            \"active\": true,\n            \"activationDate\": [\n                2017,\n                11,\n                10\n            ],\n            \"firstname\": \"ewrrg\",\n            \"lastname\": \"rth\",\n            \"displayName\": \"ewrrg rth\",\n            \"gender\": {\n                \"id\": 23,\n                \"name\": \"Male\",\n                \"isActive\": false,\n                \"mandatory\": false\n            },\n            \"clientType\": {\n                \"isActive\": false,\n                \"mandatory\": false\n            },\n            \"clientClassification\": {\n                \"isActive\": false,\n                \"mandatory\": false\n            },\n            \"officeId\": 1,\n            \"officeName\": \"Head Office\",\n            \"timeline\": {\n                \"submittedOnDate\": [\n                    2017,\n                    11,\n                    10\n                ],\n                \"submittedByUsername\": \"conflux\",\n                \"submittedByFirstname\": \"App\",\n                \"submittedByLastname\": \"Administrator\",\n                \"activatedOnDate\": [\n                    2017,\n                    11,\n                    10\n                ],\n                \"activatedByUsername\": \"conflux\",\n                \"activatedByFirstname\": \"App\",\n                \"activatedByLastname\": \"Administrator\"\n            },\n            \"legalForm\": {\n                \"id\": 1,\n                \"code\": \"legalFormType.person\",\n                \"value\": \"PERSON\"\n            },\n            \"clientNonPersonDetails\": {\n                \"constitution\": {\n                    \"isActive\": false,\n                    \"mandatory\": false\n                },\n                \"mainBusinessLine\": {\n                    \"isActive\": false,\n                    \"mandatory\": false\n                }\n            },\n            \"isLocked\": false,\n            \"isWorkflowEnabled\": false\n        }\n    ]\n}\n\nvar myJSON = JSON.stringify(obj); \n\n/*pm.test(\"Body is correct\", function () {\n    pm.response.to.have.body(myJSON)});*/",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1510576124956,
+					"name": "list of product",
+					"description": "list of product",
+					"collectionId": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"responses": [],
+					"owner": "1404846",
+					"collection": "a58e31c8-ad1d-6195-e02c-e6326513bb3f",
+					"collection_id": "a58e31c8-ad1d-6195-e02c-e6326513bb3f"
+				}
+			]
+		}
+	],
+	"environments": [
+		{
+			"id": "7c7ed174-7aea-497e-4d45-69d6161596eb",
+			"name": "Constant Varilables",
+			"values": [
+				{
+					"enabled": true,
+					"key": "tenantIdentifier",
+					"value": "default",
+					"type": "text"
+				},
+				{
+					"enabled": true,
+					"key": "username",
+					"value": "conflux",
+					"type": "text"
+				},
+				{
+					"enabled": true,
+					"key": "password",
+					"value": "password",
+					"type": "text"
+				},
+				{
+					"enabled": true,
+					"key": "Authorization",
+					"value": "Basic Y29uZmx1eDpwYXNzd29yZA==",
+					"type": "text"
+				},
+				{
+					"enabled": true,
+					"key": "ApiEnPoint",
+					"value": "https://localhost:8443/fineract-provider/api/v1/",
+					"type": "text"
+				}
+			],
+			"team": null,
+			"timestamp": 1510655036286
+		}
+	],
+	"headerPresets": [],
+	"globals": [
+		{
+			"key": "tenantIdentifier",
+			"value": "variable_value",
+			"enabled": true,
+			"type": "text"
+		},
+		{
+			"key": "username",
+			"value": "conflux",
+			"enabled": true,
+			"type": "text"
+		},
+		{
+			"key": "passowrd",
+			"value": "password",
+			"enabled": true,
+			"type": "text"
+		},
+		{
+			"key": "variable_key",
+			"value": "variable_value",
+			"enabled": true,
+			"type": "text"
+		},
+		{
+			"key": "user_id",
+			"value": "1",
+			"enabled": true,
+			"type": "text"
+		}
+	]
+}
