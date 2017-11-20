@@ -2,14 +2,13 @@
 	"variables": [],
 	"info": {
 		"name": "api testing",
-		"_postman_id": "063e7231-ec7f-4162-2a36-747dd92f1cf0",
+		"_postman_id": "b6e8a3b0-7113-ccd8-5f29-9ecf89a632be",
 		"description": "Demo, to test some api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Setup",
-			"description": "",
 			"item": [
 				{
 					"name": "Install Postman BDD and Set environment variable",
@@ -53,7 +52,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": "http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js",
 						"description": "Install Postman BDD and Set environment variable"
 					},
@@ -360,7 +362,10 @@
 										"value": "{{tenantIdentifier}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{ApiEndPoint}}clients/{{user_id}}?associations=hierarchyLookup",
 									"host": [
@@ -440,7 +445,10 @@
 										"value": "{{tenantIdentifier}}"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{ApiEndPoint}}runreports/ClientSummary/?R_clientId={{user_id}}&genericResultSet=false",
 									"host": [
@@ -587,7 +595,10 @@
 								"value": "{{Authorization}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": "{{ApiEndPoint}}loanproducts",
 						"description": "list of product"
 					},
