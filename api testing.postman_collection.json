@@ -1,0 +1,604 @@
+{
+	"variables": [],
+	"info": {
+		"name": "api testing",
+		"_postman_id": "063e7231-ec7f-4162-2a36-747dd92f1cf0",
+		"description": "Demo, to test some api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Setup",
+			"description": "",
+			"item": [
+				{
+					"name": "Install Postman BDD and Set environment variable",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setGlobalVariable('postmanBDD', responseBody);"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"if (!environment.ApiEndPoint) {",
+									"    postman.setGlobalVariable('ApiEndPoint', 'https://localhost:8443/fineract-provider/api/v1/');",
+									"}",
+									"if (!environment.Authorization) {",
+									"    postman.setGlobalVariable('Authorization', 'Basic Y29uZmx1eDpwYXNzd29yZA==');",
+									"}",
+									"if (!environment.tenantIdentifier) {",
+									"    postman.setGlobalVariable('tenantIdentifier', 'default');",
+									"}",
+									"",
+									"postman.setGlobalVariable(\"commonTests\", () => {",
+									" it('should be a successful response', () => {",
+									"    response.ok.should.be.true;",
+									"    response.should.have.status(200);",
+									"    response.statusType.should.equal(2);",
+									"    response.error.should.be.false;",
+									"});",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": "http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js",
+						"description": "Install Postman BDD and Set environment variable"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"description": "script to test list of client",
+			"item": [
+				{
+					"name": "Client creation, Delete, Update",
+					"description": "Client creation, Delete, Update",
+					"item": [
+						{
+							"name": "Create Client",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"eval(globals.postmanBDD);",
+											"",
+											"eval(globals.commonTests)();",
+											"",
+											"it('should contain the parsed JSON object', () => {",
+											"    response.body.should.be.an('object').with.keys(['officeId', 'clientId', 'resourceId']).and.not.empty;",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}"
+									},
+									{
+										"key": "Fineract-Platform-TenantId",
+										"value": "{{tenantIdentifier}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"officeId\": 1,\n\t\"legalFormId\": 1,\n\t\"genderId\": 23,\n\t\"dateOfBirth\": \"01 January 2001\",\n\t\"clientClassificationId\": 49,\n\t\"staffId\": 1,\n\t\"firstname\": \"Bharath\",\n\t\"middlename\": \"B\",\n\t\"lastname\": \"B\",\n\t\"clientTypeId\": 52,\n\t\"mobileNo\": \"0123456789\",\n\t\"alternateMobileNo\": \"0123456789\",\n\t\"email\": \"qwert@asd.com\",\n\t\"externalId\": \"12345\",\n\t\"active\": true,\n\t\"locale\": \"en\",\n\t\"dateFormat\": \"dd MMMM yyyy\",\n\t\"activationDate\": \"15 November 2017\",\n\t\"submittedOnDate\": \"15 November 2017\",\n\t\"savingsProductId\": null\n}"
+								},
+								"url": "{{ApiEndPoint}}clients",
+								"description": "Create Client"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Duplicate Client",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"eval(globals.postmanBDD);",
+											"",
+											" it('should be a successful response', () => {",
+											"    response.ok.should.be.false;",
+											"    response.should.have.status(403);",
+											"    response.statusType.should.equal(4);",
+											"    response.error.should.be.true;",
+											"});",
+											"",
+											"it('should contain the parsed JSON object', () => {",
+											"    response.body.should.be.an('object').with.keys(['developerMessage', 'httpStatusCode', 'defaultUserMessage',",
+											"     'userMessageGlobalisationCode', 'errors']).and.not.empty;",
+											"});",
+											"",
+											"it('errors array should not be null', () => {",
+											"    response.body.errors[0].should.be.an('object').and.not.empty;",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}"
+									},
+									{
+										"key": "Fineract-Platform-TenantId",
+										"value": "{{tenantIdentifier}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"officeId\": 1,\n\t\"legalFormId\": 1,\n\t\"genderId\": 23,\n\t\"dateOfBirth\": \"01 January 2001\",\n\t\"clientClassificationId\": 49,\n\t\"staffId\": 1,\n\t\"firstname\": \"Bharath\",\n\t\"middlename\": \"B\",\n\t\"lastname\": \"B\",\n\t\"clientTypeId\": 52,\n\t\"mobileNo\": \"0123456789\",\n\t\"alternateMobileNo\": \"0123456789\",\n\t\"email\": \"qwert@asd.com\",\n\t\"externalId\": \"12345\",\n\t\"active\": true,\n\t\"locale\": \"en\",\n\t\"dateFormat\": \"dd MMMM yyyy\",\n\t\"activationDate\": \"15 November 2017\",\n\t\"submittedOnDate\": \"15 November 2017\",\n\t\"savingsProductId\": null\n}"
+								},
+								"url": "{{ApiEndPoint}}clients",
+								"description": "Create Client"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Individual Clients data",
+					"description": "Individual Clients data",
+					"item": [
+						{
+							"name": "List Of Client",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"eval(globals.postmanBDD);",
+											"",
+											"it('should be a successful response', () => {",
+											"    response.ok.should.be.true;",
+											"    response.should.have.status(200);",
+											"    response.statusType.should.equal(2);",
+											"    response.error.should.be.false;",
+											"});",
+											"",
+											"",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"it('should contain the parsed JSON object', () => {",
+											"    response.body.should.be.an('object').with.keys(['totalFilteredRecords', 'pageItems']);",
+											"    response.body.pageItems.should.be.an('Array').and.not.empty;",
+											"    response.body.pageItems[0].accountNo.should.be.an('string').and.not.empty;",
+											"    response.body.pageItems.should.be.an('array').with.length(3);",
+											"   ",
+											"});",
+											"",
+											"var jsonData = JSON.parse(responseBody);",
+											"",
+											"//console.log(jsonData.pageItems[0].id);",
+											"",
+											"postman.setGlobalVariable(\"user_id\", jsonData.pageItems[0].id);",
+											"",
+											"    ",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Fineract-Platform-TenantId",
+										"value": "{{tenantIdentifier}}"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{ApiEndPoint}}clients?limit=15&offset=0",
+									"host": [
+										"{{ApiEndPoint}}clients"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "15",
+											"equals": true
+										},
+										{
+											"key": "offset",
+											"value": "0",
+											"equals": true
+										}
+									]
+								},
+								"description": "To Test API's of clients"
+							},
+							"response": []
+						},
+						{
+							"name": "Clients data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"eval(globals.postmanBDD);",
+											"",
+											"eval(globals.commonTests)();",
+											"",
+											"var expectedJson =",
+											"{",
+											"    \"id\": 1,",
+											"    \"accountNo\": \"000000001\",",
+											"    \"status\": {",
+											"        \"id\": 300,",
+											"        \"code\": \"clientStatusType.active\",",
+											"        \"value\": \"Active\"",
+											"    },",
+											"    \"subStatus\": {",
+											"        \"isActive\": false,",
+											"        \"mandatory\": false",
+											"    },",
+											"    \"active\": true,",
+											"    \"activationDate\": [",
+											"        2017,",
+											"        11,",
+											"        10",
+											"    ],",
+											"    \"firstname\": \"ewrrg\",",
+											"    \"lastname\": \"rth\",",
+											"    \"displayName\": \"ewrrg rth\",",
+											"    \"gender\": {",
+											"        \"id\": 23,",
+											"        \"name\": \"Male\",",
+											"        \"isActive\": false,",
+											"        \"mandatory\": false",
+											"    },",
+											"    \"clientType\": {",
+											"        \"isActive\": false,",
+											"        \"mandatory\": false",
+											"    },",
+											"    \"clientClassification\": {",
+											"        \"isActive\": false,",
+											"        \"mandatory\": false",
+											"    },",
+											"    \"officeId\": 1,",
+											"    \"officeName\": \"Head Office\",",
+											"    \"timeline\": {",
+											"        \"submittedOnDate\": [",
+											"            2017,",
+											"            11,",
+											"            10",
+											"        ],",
+											"        \"submittedByUsername\": \"conflux\",",
+											"        \"submittedByFirstname\": \"App\",",
+											"        \"submittedByLastname\": \"Administrator\",",
+											"        \"activatedOnDate\": [",
+											"            2017,",
+											"            11,",
+											"            10",
+											"        ],",
+											"        \"activatedByUsername\": \"conflux\",",
+											"        \"activatedByFirstname\": \"App\",",
+											"        \"activatedByLastname\": \"Administrator\"",
+											"    },",
+											"    \"legalForm\": {",
+											"        \"id\": 1,",
+											"        \"code\": \"legalFormType.person\",",
+											"        \"value\": \"PERSON\"",
+											"    },",
+											"    \"groups\": [],",
+											"    \"clientNonPersonDetails\": {",
+											"        \"constitution\": {",
+											"            \"isActive\": false,",
+											"            \"mandatory\": false",
+											"        },",
+											"        \"mainBusinessLine\": {",
+											"            \"isActive\": false,",
+											"            \"mandatory\": false",
+											"        }",
+											"    },",
+											"    \"isLocked\": false,",
+											"    \"isWorkflowEnabled\": false",
+											"}",
+											"",
+											"var myJSON = JSON.stringify(expectedJson); ",
+											"",
+											"pm.test(\"Body is correct\", function () {",
+											"    pm.response.to.have.body(myJSON)});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}"
+									},
+									{
+										"key": "Fineract-Platform-TenantId",
+										"value": "{{tenantIdentifier}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{ApiEndPoint}}clients/{{user_id}}?associations=hierarchyLookup",
+									"host": [
+										"{{ApiEndPoint}}clients"
+									],
+									"path": [
+										"{{user_id}}"
+									],
+									"query": [
+										{
+											"key": "associations",
+											"value": "hierarchyLookup",
+											"equals": true
+										}
+									]
+								},
+								"description": "Clients data"
+							},
+							"response": []
+						},
+						{
+							"name": "Client Summary Data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"eval(globals.postmanBDD);",
+											"",
+											"eval(globals.commonTests)();",
+											"",
+											"it('should contain the parsed JSON object', () => {",
+											"    response.body.should.be.an('Array').and.not.empty;",
+											"    response.body[0].should.be.an('object').with.keys(['loanCycle', 'activeLoans', 'lastLoanAmount', ",
+											"    'activeSavings', 'totalSavings', 'productName', 'loanProductCycle']);",
+											"});",
+											"",
+											"",
+											"var expectedJson =",
+											"[",
+											"{\"loanCycle\": 0,",
+											"\"activeLoans\": 1,",
+											"\"lastLoanAmount\": 10000.000000,",
+											"\"activeSavings\": 0,",
+											"\"totalSavings\": 0.000000,",
+											"\"productName\": \"Esta\",",
+											"\"loanProductCycle\": 1}",
+											"]",
+											"",
+											"//postman.setGlobalVariable(\"user_id\", expectedJson[0].lastLoanAmount);",
+											"",
+											"console.log(expectedJson[0].lastLoanAmount);",
+											"",
+											"var myJSON = JSON.stringify(expectedJson); ",
+											"",
+											"//pm.test(\"Body is correct\", function () {",
+											"//    pm.response.to.have.body(myJSON)});",
+											"",
+											"pm.test(\"test lastLoanAmount\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(expectedJson[0].lastLoanAmount).to.eql(10000);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}"
+									},
+									{
+										"key": "Fineract-Platform-TenantId",
+										"value": "{{tenantIdentifier}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{ApiEndPoint}}runreports/ClientSummary/?R_clientId={{user_id}}&genericResultSet=false",
+									"host": [
+										"{{ApiEndPoint}}runreports"
+									],
+									"path": [
+										"ClientSummary",
+										""
+									],
+									"query": [
+										{
+											"key": "R_clientId",
+											"value": "{{user_id}}",
+											"equals": true
+										},
+										{
+											"key": "genericResultSet",
+											"value": "false",
+											"equals": true
+										}
+									]
+								},
+								"description": "Client Summary Data"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"description": "To Check list of product",
+			"item": [
+				{
+					"name": "list of product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var obj = {",
+									"    \"totalFilteredRecords\": 1,",
+									"    \"pageItems\": [",
+									"        {",
+									"            \"id\": 1,",
+									"            \"accountNo\": \"000000001\",",
+									"            \"status\": {",
+									"                \"id\": 300,",
+									"                \"code\": \"clientStatusType.active\",",
+									"                \"value\": \"Active\"",
+									"            },",
+									"            \"subStatus\": {",
+									"                \"isActive\": false,",
+									"                \"mandatory\": false",
+									"            },",
+									"            \"active\": true,",
+									"            \"activationDate\": [",
+									"                2017,",
+									"                11,",
+									"                10",
+									"            ],",
+									"            \"firstname\": \"ewrrg\",",
+									"            \"lastname\": \"rth\",",
+									"            \"displayName\": \"ewrrg rth\",",
+									"            \"gender\": {",
+									"                \"id\": 23,",
+									"                \"name\": \"Male\",",
+									"                \"isActive\": false,",
+									"                \"mandatory\": false",
+									"            },",
+									"            \"clientType\": {",
+									"                \"isActive\": false,",
+									"                \"mandatory\": false",
+									"            },",
+									"            \"clientClassification\": {",
+									"                \"isActive\": false,",
+									"                \"mandatory\": false",
+									"            },",
+									"            \"officeId\": 1,",
+									"            \"officeName\": \"Head Office\",",
+									"            \"timeline\": {",
+									"                \"submittedOnDate\": [",
+									"                    2017,",
+									"                    11,",
+									"                    10",
+									"                ],",
+									"                \"submittedByUsername\": \"conflux\",",
+									"                \"submittedByFirstname\": \"App\",",
+									"                \"submittedByLastname\": \"Administrator\",",
+									"                \"activatedOnDate\": [",
+									"                    2017,",
+									"                    11,",
+									"                    10",
+									"                ],",
+									"                \"activatedByUsername\": \"conflux\",",
+									"                \"activatedByFirstname\": \"App\",",
+									"                \"activatedByLastname\": \"Administrator\"",
+									"            },",
+									"            \"legalForm\": {",
+									"                \"id\": 1,",
+									"                \"code\": \"legalFormType.person\",",
+									"                \"value\": \"PERSON\"",
+									"            },",
+									"            \"clientNonPersonDetails\": {",
+									"                \"constitution\": {",
+									"                    \"isActive\": false,",
+									"                    \"mandatory\": false",
+									"                },",
+									"                \"mainBusinessLine\": {",
+									"                    \"isActive\": false,",
+									"                    \"mandatory\": false",
+									"                }",
+									"            },",
+									"            \"isLocked\": false,",
+									"            \"isWorkflowEnabled\": false",
+									"        }",
+									"    ]",
+									"}",
+									"",
+									"var myJSON = JSON.stringify(obj); ",
+									"",
+									"/*pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body(myJSON)});*/"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Fineract-Platform-TenantId",
+								"value": "{{tenantIdentifier}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}"
+							}
+						],
+						"body": {},
+						"url": "{{ApiEndPoint}}loanproducts",
+						"description": "list of product"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"description": "Authentication",
+			"item": []
+		}
+	]
+}
